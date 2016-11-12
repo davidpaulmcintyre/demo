@@ -1,0 +1,13 @@
+$height: 60px;
+
+.imgAvatar {
+  height: $height;
+  width: $height;
+}
+// todo:  use sass var
+.cellUsername {
+  margin-left: 5px;
+  display: inline-block;
+  line-height: $height;
+  vertical-align: top;
+}

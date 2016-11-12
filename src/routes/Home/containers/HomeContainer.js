@@ -1,40 +1,120 @@
 import { connect } from 'react-redux'
 import { getIssues } from '../../../store/issues'
+import { setCurrentPage } from '../../../store/pagination'
 import React, { Component, PropTypes } from 'react'
+import Dimensions from 'react-dimensions'
+const height = 1000
 import HomeView from '../components/HomeView'
+import Paginator from '../components/Paginator'
 
 class HomeContainer extends Component {
-  componentDidMount() {
-    this.props.getIssues(1, 10);
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      // T if disabled because button has disabled, not enabled, attribute
+      navDisabled: {
+        next: false,
+        last: false,
+        back: true,
+        first: true
+      }
+    }
   }
-  render() {
+
+  componentDidMount () {
+    // todo: busy indicator
+    this.fetch(this.props.currentPage)
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.links) {
+      const disabled = {
+        next: (!nextProps.links.next),
+        last: (!nextProps.links.last),
+        back: (!nextProps.links.back),
+        first: (!nextProps.links.first)
+      }
+      this.setState({
+        navDisabled: disabled
+      })
+    }
+  }
+
+  fetch (page, url) {
+    // todo:  make pagesize dynamic
+    this.props.getIssues(url)
+    this.props.setCurrentPage(page)
+  }
+
+  goForward () {
+    const page = this.props.currentPage + 1
+    this.fetch(page, this.props.links.next)
+  }
+
+  goBack () {
+    const page = this.props.currentPage - 1
+    this.fetch(page, this.props.links.back)
+  }
+
+  goToLastPage () {
+    // parse url to find page count
+    const strUrl = this.props.links.last
+    let lastPage = this.props.currentPage
+    debugger
+    const pageToken = 'page='
+    const start = strUrl.indexOf(pageToken) + pageToken.length
+    const stop = strUrl.indexOf('&')
+
+    const page = strUrl.substring(start, stop)
+    if (!isNaN(page)) {
+      lastPage = Number(page)
+    }
+    this.fetch(lastPage, strUrl)
+  }
+
+  goToFirstPage () {
+    const page = 1
+    this.fetch(page, this.props.links.first)
+  }
+
+  render () {
     return (
-      <HomeView rows={this.props.issues} height={500} width={900} />
-    );
+      <div>
+        <Paginator currentPage={this.props.currentPage}
+          next={this.goForward.bind(this)}
+          back={this.goBack.bind(this)}
+          first={this.goToFirstPage.bind(this)}
+          last={this.goToLastPage.bind(this)}
+          disabling={this.state.navDisabled} />
+        <HomeView rows={this.props.issues} height={height}
+          width={this.props.containerWidth - 100} />
+      </div>
+    )
   }
 }
 
 HomeContainer.defaultProps = {
-  issues: []
-};
+  issues: [],
+  links: {}
+}
 
 HomeContainer.propTypes = {
   issues: PropTypes.array
 }
 
 const mapDispatchToProps = {
-  getIssues: (page, size) => getIssues(page, size)
+  getIssues: (page, size) => getIssues(page, size),
+  setCurrentPage: (page) => setCurrentPage(page)
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
-    issues: state.issues
-  };
+    issues: state.issues.issues,
+    currentPage: state.pagination.page,
+    links: state.pagination.links
+    // pageSize: state.pagination.size
+  }
 }
 
-// const mapStateToProps = (state) => ({
-//   counter : state.counter,
-//   issues: state.issues
-// })
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(Dimensions()(HomeContainer))

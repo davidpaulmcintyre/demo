@@ -1,22 +1,24 @@
 export const RECEIVE_PAGINATION = 'RECEIVE_PAGINATION'
 
-export function receivePagination (paging) {
+export function setCurrentPage (newPage) {
   return {
     type    : RECEIVE_PAGINATION,
-    payload : paging
+    payload : newPage
   }
 }
 
-export const getIssues = ({ dispatch }) => {
-  return (issues) => dispatch(receiveIssues(issues))
-}
-
 const initialState = {
+  links: {},
   page: 1,
   size: 25
-};
+}
 export default function paginationReducer (state = initialState, action) {
-  return action.type === RECEIVE_PAGINATION
-    ? action.payload
-    : state
+  switch (action.type) {
+    case RECEIVE_PAGINATION:
+      return Object.assign({}, state, { page: action.payload })
+    case 'RECEIVE_LINKS':
+      return Object.assign({}, state, { links: action.payload })
+    default:
+      return state
+  }
 }

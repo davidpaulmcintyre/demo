@@ -1,0 +1,44 @@
+.title {
+  font-size: 32px;
+}
+
+.number {
+  color: gray;
+}
+
+$height: 80px;
+
+.imgAvatar {
+  height: $height;
+  width: $height;
+}
+
+.reportedBy {
+  color: gray;
+}
+
+.linkReporter {
+  font-weight: bold;
+}
+
+.linkReporter:link, .linkReporter:visited {
+    text-decoration: none;
+}
+
+.linkReporter:hover {
+    text-decoration: underline;
+}
+
+.linkReporter:link, .linkReporter:visited, .linkReporter:hover, .linkReporter:active {
+    color: #555;
+}
+
+.containerHeader {
+  background-color: #f7f7f7;
+}
+
+.containerBorder {
+  padding: 15px;
+  border: 1px solid #ddd;
+}
+
