@@ -1,3 +1,4 @@
+"use strict";
 const webpack = require('webpack')
 const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')

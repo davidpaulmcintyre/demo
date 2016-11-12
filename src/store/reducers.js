@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
-import locationReducer from './location'
+import issuesReducer from './issues'
+import paginationReducer from './pagination'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    location: locationReducer,
+    issues: issuesReducer,
+    pagination: paginationReducer,
     ...asyncReducers
   })
 }
