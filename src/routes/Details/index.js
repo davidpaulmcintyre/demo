@@ -5,7 +5,7 @@ import DetailsContainer from './containers/DetailsContainer'
 //   component : DetailsContainer
 // }
 
-import { injectReducer } from '../../store/reducers'
+// import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
   path : ':id',
@@ -16,7 +16,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const DetailsContainer = require('./containers/DetailsContainer').default
+      // const DetailsContainer = require('./containers/DetailsContainer').default
       // const reducer = require('./modules/counter').default
 
       /*  Add the reducer to the store on key 'counter'  */

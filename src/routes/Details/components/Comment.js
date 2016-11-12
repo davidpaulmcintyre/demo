@@ -9,7 +9,7 @@ const Comment = ({ user = {}, body }) => {
         </div>
       </div>
       <div className='containerBorder'>
-        {issue.body}
+        {body}
       </div>
     </div>
   )

@@ -61,7 +61,6 @@ class HomeContainer extends Component {
     // parse url to find page count
     const strUrl = this.props.links.last
     let lastPage = this.props.currentPage
-    debugger
     const pageToken = 'page='
     const start = strUrl.indexOf(pageToken) + pageToken.length
     const stop = strUrl.indexOf('&')
