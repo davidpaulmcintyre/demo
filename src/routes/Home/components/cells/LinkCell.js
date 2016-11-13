@@ -10,5 +10,5 @@ const LinkCell = ({ rowIndex, data, col, ...props }) => {
     </Cell>
   )
 }
-// `/${data[rowIndex][col]}`
+
 export default LinkCell

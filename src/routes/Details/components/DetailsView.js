@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 import Label from '../../../components/Label'
 import Comment from './Comment'
 import './DetailsView.scss'
@@ -9,16 +10,20 @@ class DetailsView extends Component {
     const issue = this.props.issue
     const labels = issue.labels || []
     const user = issue.user || {}
+    const comments = this.props.comments || [];
     return (
       <div>
         <div className='title'>{issue.title}
-          <span className='number'>#{issue.number}</span>
+          <span className='number'> #{issue.number}</span>
         </div>
-        <Label className={'containerLarge'}>{issue.state}</Label>
-        <div className='labels'>
-          <ul>
+        <div>
+          <Link to='/'>{'Back to List'}</Link>
+        </div>
+        <div>
+          <Label className={'containerLarge'}>{issue.state}</Label>
+          <ul className='listLabels'>
             {labels.map((label, index) =>
-              <li key={index}><Label className={'containerLarge'}>{label.name}</Label></li>
+              <li key={index} className='itemLabel'><Label className={'containerLarge'}>{label.name}</Label></li>
             )}
           </ul>
         </div>
@@ -34,8 +39,8 @@ class DetailsView extends Component {
         </div>
         <div className='comments'>
           <ul>
-            {this.props.comments.map((comment, index) =>
-              <li key={index}><Comment body={issue.body} user={user} /></li>
+            {comments.map((comment, index) =>
+              <li key={index}><Comment comment={comment} /></li>
             )}
           </ul>
         </div>

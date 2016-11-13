@@ -18,7 +18,7 @@ class HomeView extends Component {
         user: 174,
         summary: 300
       }
-    }
+    };
     this.onColumnResizeEndCallback = this.onColumnResizeEndCallback.bind(this)
   }
 

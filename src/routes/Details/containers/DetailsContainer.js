@@ -18,10 +18,9 @@ class DetailsContainer extends Component {
   }
 
   render () {
-    const { issue } = this.props
     return (
       <div>
-        <DetailsView issue={issue} comments={this.props.comments} />
+        <DetailsView issue={this.props.issue} comments={this.props.comments} />
       </div>
     )
   }

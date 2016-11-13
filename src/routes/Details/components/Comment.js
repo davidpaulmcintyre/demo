@@ -1,6 +1,9 @@
 import React from 'react'
 
-const Comment = ({ user = {}, body }) => {
+const Comment = (props) => {
+  const comment = props.comment || {};
+  const body = comment.body;
+  const user = comment.user || {};
   return (
     <div>
       <div className='containerHeader'>
