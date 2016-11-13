@@ -1,9 +1,12 @@
 import React from 'react'
+import FormatLinks from '../../../components/FormatLinks/formatLinks'
 
 const Comment = (props) => {
   const comment = props.comment || {};
   const body = comment.body;
   const user = comment.user || {};
+  // replace @usernames in text block with hyperlink
+  const bodyFormatted = formatLinks(body);
   return (
     <div>
       <div className='containerHeader'>
@@ -12,7 +15,7 @@ const Comment = (props) => {
         </div>
       </div>
       <div className='containerBorder'>
-        {body}
+        <FormatLinks text={bodyFormatted} />
       </div>
     </div>
   )

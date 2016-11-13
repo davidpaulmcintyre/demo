@@ -17,22 +17,6 @@ $height: 80px;
   color: gray;
 }
 
-.linkReporter {
-  font-weight: bold;
-}
-
-.linkReporter:link, .linkReporter:visited {
-    text-decoration: none;
-}
-
-.linkReporter:hover {
-    text-decoration: underline;
-}
-
-.linkReporter:link, .linkReporter:visited, .linkReporter:hover, .linkReporter:active {
-    color: #555;
-}
-
 .containerHeader {
   background-color: #f7f7f7;
 }

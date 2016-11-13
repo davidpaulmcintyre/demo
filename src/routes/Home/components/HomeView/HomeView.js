@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TextCell from '../Cells/TextCell'
+import TextCell from '../Cells/textCell'
 import UserCell from '../Cells/UserCell'
 import LinkCell from '../Cells/LinkCell'
 import TruncatedTextCell from '../Cells/TruncatedTextCell'
@@ -98,6 +98,12 @@ class HomeView extends Component {
     )
   }
 
+}
+
+HomeView.defaultProps = {
+  rows: [],
+  height: 0,
+  width: 0
 }
 
 export default HomeView

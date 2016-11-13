@@ -95,11 +95,13 @@ class HomeContainer extends Component {
 
 HomeContainer.defaultProps = {
   issues: [],
-  links: {}
+  links: {},
+  currentPage: 1
 }
 
 HomeContainer.propTypes = {
-  issues: PropTypes.array
+  issues: PropTypes.array,
+  currentPage: PropTypes.number
 }
 
 const mapDispatchToProps = {
@@ -112,7 +114,6 @@ function mapStateToProps (state) {
     issues: state.issues.issues,
     currentPage: state.pagination.page,
     links: state.pagination.links
-    // pageSize: state.pagination.size
   }
 }
 

@@ -14,16 +14,14 @@ describe('(Store) createStore', () => {
     expect(store.asyncReducers).to.be.empty
   })
 
-  describe('(Location)', () => {
-    it('store should be initialized with Location state', () => {
-      const location = {
-        pathname : '/echo'
-      }
+  describe('(Issues reducer)', () => {
+    it('store should be initialized with Issues state', () => {
+      const issues = [ { id: 1, username: 'foo' }];
       store.dispatch({
-        type    : 'LOCATION_CHANGE',
-        payload : location
+        type    : 'RECEIVE_ISSUES',
+        payload : issues
       })
-      expect(store.getState().location).to.deep.equal(location)
+      expect(store.getState().issues.issues).to.deep.equal(issues)
     })
   })
 })
