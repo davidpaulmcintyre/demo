@@ -2,7 +2,6 @@ export const RECEIVE_ISSUES = 'RECEIVE_ISSUES';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const REMOVE_COMMENTS = 'REMOVE_COMMENTS';
 export const RECEIVE_LINKS = 'RECEIVE_LINKS';
-export const RECEIVE_USER = 'RECEIVE_USER';
 const URL_ROOT = 'https://api.github.com/'
 
 const handleErrors = (response) => {
@@ -48,7 +47,7 @@ export const getIssues = (_url) => {
   // todo:  add encodeuri
   const url = _url || URL_ROOT.concat(`repos/rails/rails/issues?page=1&per_page=25`)
   return dispatch => {
-    return fetch(url)
+    return fetch(encodeURI(url))
       .then(response => parse(response))
       .then(response => {
         dispatch(receiveLinks(response.links))
@@ -63,22 +62,22 @@ export const getIssues = (_url) => {
 export const getComments = (issueId) => {
   const url = URL_ROOT.concat(`repos/rails/rails/issues/${issueId}/comments`)
   return dispatch => {
-    return fetch(url)
+    return fetch(encodeURI(url))
       .then(response => handleErrors(response))
       .then(json => dispatch(receiveComments(json)))
       .catch(e => console.log('Error: error retrieving comments'))
   }
 }
 
-export const getUserLink = (username) => {
-  const url = URL_ROOT.concat(`users/${username}`)
-  return dispatch => {
-    return fetch(url)
-      .then(response => handleErrors(response))
-      .then(json => dispatch(receiveUser(json)))
-      .catch(e => console.log('Error: error retrieving user info'))
-  }
-}
+// export const getUserLink = (username) => {
+//   const url = URL_ROOT.concat(`users/${username}`)
+//   return dispatch => {
+//     return fetch(encodeURI(url))
+//       .then(response => handleErrors(response))
+//       .then(json => dispatch(receiveUser(json)))
+//       .catch(e => console.log('Error: error retrieving user info'))
+//   }
+// }
 
 export function receiveIssues (issues = []) {
   return {
@@ -91,14 +90,6 @@ export function receiveLinks (links = []) {
   return {
     type    : RECEIVE_LINKS,
     payload : links
-  }
-}
-
-export function receiveUser (user = {}) {
-
-  return {
-    type    : RECEIVE_USER,
-    payload : user
   }
 }
 
@@ -124,14 +115,6 @@ export default function issueReducer (state = initialState, action) {
   switch (action.type) {
     case RECEIVE_ISSUES:
       return Object.assign({}, state, { issues: action.payload })
-    case RECEIVE_USER:
-      const user = {
-        [action.payload.login]: {
-          url: action.payload.url
-        }
-      }
-      const users = Object.assign({}, state.users, user)
-      return Object.assign({}, state, users)
     case RECEIVE_COMMENTS:
       return Object.assign({}, state, { comments: action.payload })
     case REMOVE_COMMENTS:

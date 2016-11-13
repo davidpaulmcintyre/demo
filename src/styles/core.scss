@@ -28,3 +28,20 @@ ul {
   padding: 10px 30px;
 }
 
+
+.username {
+  font-weight: bold;
+}
+
+.username:link, .username:visited {
+    text-decoration: none;
+}
+
+.username:hover {
+    text-decoration: underline;
+}
+
+.username:link, .username:visited, .username:hover, .username:active {
+    color: #555;
+}
+

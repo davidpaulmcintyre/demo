@@ -8,7 +8,7 @@ const Comment = (props) => {
     <div>
       <div className='containerHeader'>
         <div className='containerBorder'>
-          <a className='linkReporter' href={user.html_url}>{user.login}</a>
+          <a className='username' href={user.html_url}>{user.login}</a>
         </div>
       </div>
       <div className='containerBorder'>
