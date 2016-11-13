@@ -16,7 +16,7 @@ describe('(Store) createStore', () => {
 
   describe('(Issues reducer)', () => {
     it('store should be initialized with Issues state', () => {
-      const issues = [ { id: 1, username: 'foo' }];
+      const issues = [ { id: 1, username: 'foo' } ];
       store.dispatch({
         type    : 'RECEIVE_ISSUES',
         payload : issues

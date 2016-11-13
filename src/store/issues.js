@@ -44,7 +44,6 @@ const parse = (response) => {
 
 // export const getIssues = (page, size) => {
 export const getIssues = (_url) => {
-  // todo:  add encodeuri
   const url = _url || URL_ROOT.concat(`repos/rails/rails/issues?page=1&per_page=25`)
   return dispatch => {
     return fetch(encodeURI(url))

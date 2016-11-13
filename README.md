@@ -12,6 +12,7 @@ Source code can also be viewed at [my github repo](https://github.com/davidpaulm
 ```javascript
 npm run start
 ```
+Then navigate to http://localhost:3000. 
 ## Testing
 ```javascript
 npm run test

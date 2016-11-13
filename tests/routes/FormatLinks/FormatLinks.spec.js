@@ -8,38 +8,11 @@ describe('(View) FormatLinks', () => {
   beforeEach(() => {
     // phantomjs needs polyfills
     if (!String.prototype.startsWith) {
-      String.prototype.startsWith = function(searchString, position){
+      String.prototype.startsWith = function (searchString, position) {
         position = position || 0;
         return this.substr(position, searchString.length) === searchString;
       };
     }
-
-    // if (!Array.prototype.find) {
-    //   Object.defineProperty(Array.prototype, 'find', {
-    //     value: function(predicate) {
-    //     'use strict';
-    //     if (this == null) {
-    //       throw new TypeError('Array.prototype.find called on null or undefined');
-    //     }
-    //     if (typeof predicate !== 'function') {
-    //       throw new TypeError('predicate must be a function');
-    //     }
-    //     var list = Object(this);
-    //     var length = list.length >>> 0;
-    //     var thisArg = arguments[1];
-    //     var value;
-
-    //     for (var i = 0; i < length; i++) {
-    //       value = list[i];
-    //       if (predicate.call(thisArg, value, i, list)) {
-    //         return value;
-    //       }
-    //     }
-    //     return undefined;
-    //     }
-    //   });
-    // }
-
   })
 
   it('Does not require props', () => {
@@ -76,5 +49,4 @@ describe('(View) FormatLinks', () => {
     expect(_component).to.exist;
     expect(_component.find('a')).to.have.text('@foo');
   })
- 
 })

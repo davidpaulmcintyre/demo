@@ -6,7 +6,6 @@ const Comment = (props) => {
   const body = comment.body;
   const user = comment.user || {};
   // replace @usernames in text block with hyperlink
-  const bodyFormatted = formatLinks(body);
   return (
     <div>
       <div className='containerHeader'>
@@ -15,7 +14,7 @@ const Comment = (props) => {
         </div>
       </div>
       <div className='containerBorder'>
-        <FormatLinks text={bodyFormatted} />
+        <FormatLinks text={body} />
       </div>
     </div>
   )
